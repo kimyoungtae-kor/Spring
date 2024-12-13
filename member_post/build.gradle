@@ -1,0 +1,70 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.4.1-SNAPSHOT'
+	id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'shop.youngatae'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/snapshot' }
+}
+
+dependencies {
+	testImplementation 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+	
+
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.4'
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.4'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	// https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-core
+	// implementation 'org.apache.tomcat.embed:tomcat-embed-core:9.0.96'
+
+
+	// https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-jasper
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+
+
+	// https://mvnrepository.com/artifact/jakarta.servlet.jsp.jstl/jakarta.servlet.jsp.jstl-api
+implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.2'
+// https://mvnrepository.com/artifact/org.glassfish.web/jakarta.servlet.jsp.jstl
+implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
+
+
+// // https://mvnrepository.com/artifact/jakarta.servlet.jsp.jstl/jakarta.servlet.jsp.jstl-api
+// implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:2.0.0'
+
+
+	// https://mvnrepository.com/artifact/jstl/jstl
+	// implementation 'jstl:jstl:1.2'
+
+// 	// https://mvnrepository.com/artifact/javax.servlet/jstl
+// implementation 'javax.servlet:jstl:1.2'
+
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

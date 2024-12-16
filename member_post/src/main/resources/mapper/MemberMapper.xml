@@ -8,6 +8,7 @@
     select * from tbl_member where id = #{id}
   </select>
     <insert id="insert" >
-    insert into member (username,tel,gender,email,id,pw,road_addr,detail_addr) values(#{username},#{tel},#{gender},#{email},#{id},#{pw},#{roadAddr},#{detailAddr})
+      insert into tbl_member (id, pwd, name, email, road_addr, detail_addr) 
+      values (#{id}, #{pwd}, #{name}, #{email}, #{roadAddr}, #{detailAddr})
   </insert>
 </mapper>

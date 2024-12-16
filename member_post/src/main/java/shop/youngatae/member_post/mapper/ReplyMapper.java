@@ -2,6 +2,7 @@ package shop.youngatae.member_post.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -10,6 +11,7 @@ import shop.youngatae.member_post.dto.ReplyCri;
 import shop.youngatae.member_post.vo.Post;
 import shop.youngatae.member_post.vo.Reply;
 
+@Mapper
 public interface ReplyMapper {
 	int insert(Reply reply);
 	int update(Reply reply);

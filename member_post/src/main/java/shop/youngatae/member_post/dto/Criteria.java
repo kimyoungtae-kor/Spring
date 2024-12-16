@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class Criteria {
     private int page = 1;
     private int amount = 10;
-    private int category;
+    private int category = 2;
     private String type;
     private String keyword;
     

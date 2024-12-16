@@ -2,8 +2,12 @@ package shop.youngatae.member_post.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+import lombok.AllArgsConstructor;
 import shop.youngatae.member_post.dto.Criteria;
 import shop.youngatae.member_post.vo.Post;
+
 
 public interface PostService {
 	

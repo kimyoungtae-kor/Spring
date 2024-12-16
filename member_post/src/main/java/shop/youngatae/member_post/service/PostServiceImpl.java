@@ -2,30 +2,33 @@ package shop.youngatae.member_post.service;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
 
-import shop.youngatae.member_post.dao.PostDao;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import shop.youngatae.member_post.dto.Criteria;
+import shop.youngatae.member_post.dto.PageDto;
 import shop.youngatae.member_post.mapper.AttachMapper;
-import shop.youngatae.member_post.mapper.MemberMapper;
+
 import shop.youngatae.member_post.mapper.PostMapper;
-import shop.youngatae.member_post.utils.MybatisInit;
+import shop.youngatae.member_post.mapper.ReplyMapper;
 import shop.youngatae.member_post.vo.Post;
 
+@Service
+
+@AllArgsConstructor
+@Transactional
 public class PostServiceImpl implements PostService{
-		private PostDao postDao = new PostDao();
-		public static void main(String[] args) {
-			new PostServiceImpl().write(Post.builder().title("제목").content("abcd").writer("dydxo4423").cno(2).build());
-		}
+		private PostMapper mapper;
+		private AttachMapper attachMapper;
+		private ReplyMapper replyMapper;
+
 	@Override
 	public int write(Post post) {
-		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
-			PostMapper mapper = session.getMapper(PostMapper.class);
-			AttachMapper attachMapper = session.getMapper(AttachMapper.class);
-			System.out.println(post);// null
 			mapper.write(post);
-			
-			System.out.println(post);//not null
 			post.getAttachs().forEach(a -> {
 				a.setPno(post.getPno());
 				attachMapper.insert(a);
@@ -33,72 +36,47 @@ public class PostServiceImpl implements PostService{
 			
 			
 			return 0;
-		}
+		
 	}
 
 	@Override
 	public int modify(Post post) {
-
-		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
-			PostMapper mapper = session.getMapper(PostMapper.class);
-			return mapper.update(post);
-		}
+		return mapper.update(post);
 	}
 
 	@Override
 	public int remove(Long pno) {
-
-		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
-			PostMapper mapper = session.getMapper(PostMapper.class);
-			AttachMapper attachMapper = session.getMapper(AttachMapper.class);
-			attachMapper.delete(pno);
-			return mapper.delete(pno);
-		}
+		attachMapper.delete(pno);
+		replyMapper.deleteAll(pno);
+		return mapper.delete(pno);
 	}
 	
 	@Override
 	public Post findBy(Long pno) {
 
-		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
-			PostMapper mapper = session.getMapper(PostMapper.class);
-			AttachMapper attachMapper = session.getMapper(AttachMapper.class);
-			Post post = mapper.selectOne(pno);
-			post.setAttachs(attachMapper.selectList(pno));
-			
-			return post;
-		}
+		return mapper.selectOne(pno);
 	}
 	
 	
 	
 	@Override
     public Post view(Long pno) {
-        try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)) {
-            PostMapper mapper = session.getMapper(PostMapper.class);
-            AttachMapper attachMapper = session.getMapper(AttachMapper.class);
-            mapper.increaseviewCount(pno);
-            Post post = mapper.selectOne(pno);
-            post.setAttachs(attachMapper.selectList(pno));
-            return post;
-        }
+       mapper.increaseviewCount(pno);
+			 Post post = mapper.selectOne(pno);
+			 post.setAttachs(attachMapper.selectList(pno));
+
+			 return post;
     }
 
 	@Override
 	public List<Post> list(Criteria cri) {
-
-		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
-			PostMapper mapper = session.getMapper(PostMapper.class);
-			return mapper.selectList(cri);
-		}
+		return mapper.selectList(cri);
 	}
 
 	@Override
 	public int count(Criteria cri) {
 
-		try(SqlSession session = MybatisInit.getInstance().sqlSessionFactory().openSession(true)){
-			PostMapper mapper = session.getMapper(PostMapper.class);
-			return mapper.getCount(cri);
-		}
+		return mapper.getCount(cri);
 	}
 	
 	

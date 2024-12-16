@@ -1,5 +1,7 @@
 package shop.youngatae.member_post.service;
 
+import java.lang.reflect.Member;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,4 +19,9 @@ public class MemberServiceTests {
   public void testFindby(){
     log.info(service.findBy("dydxo4423"));
   }
+
+  // @Test
+  // public void testSignup() {
+  //   Member member = Member.builder().id("test002").pw().name("새똥이").build()
+  // }
 }

@@ -23,7 +23,7 @@ public class MemberMapperTests {
 
   @Test
   public void testSignin(){
-    log.info(mapper.selectOne("dydxo4423"));
+    log.info(mapper.selectOne("dydxo44234"));
   }
 
 }

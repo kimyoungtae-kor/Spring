@@ -1,11 +1,18 @@
+# logging:
+#   config: classpath:log4j2.yml
 server:
   port: 9999
 spring:
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
   application:
     name: jdbc
   datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://54.180.100.36:3306/post
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:mariadb://np.youngatae.shop:3306/post
     username: sample
     password: 1234
   mvc:

@@ -2,12 +2,13 @@ package shop.youngatae.member_post.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import shop.youngatae.member_post.dto.Criteria;
-import shop.youngatae.member_post.vo.Member;
 import shop.youngatae.member_post.vo.Post;
 
+@Mapper
 public interface PostMapper {
 	List<Post> selectList(Criteria cri);
 	
@@ -25,4 +26,7 @@ public interface PostMapper {
 	int delete(Long pno);
 
 	List<Post> selectList();
+
+	@Select("select * from tbl_post")
+	List<Post> l();
 }

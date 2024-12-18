@@ -137,8 +137,10 @@
   
       </div>
         </main>
+
 		<script src="${cp}js/reply.js"></script>
         <script>
+            console.log("${cp}");
 			moment.locale('ko');            
             const pno = '${post.pno}';
 

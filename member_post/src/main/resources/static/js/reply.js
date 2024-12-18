@@ -1,6 +1,10 @@
 // const replyService =  {};
 const replyService = (function() {
-    const url = "/member_post/reply";
+    const url = "/reply";
+    $.ajaxSetup({
+
+        contentType: 'application/json; charset=utf-8'
+    })
 
     function write(reply,callback) {
         
@@ -34,7 +38,7 @@ const replyService = (function() {
 	        });
 	    }
     function view(rno,callback){
-        $.getJSON(url + "/" + rno).done(function(data){
+        $.getJSON(url + "/selectone/" + rno).done(function(data){
             if(callback)
                 callback(data);
         })

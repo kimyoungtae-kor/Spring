@@ -17,7 +17,7 @@ import shop.youngatae.member_post.vo.Reply;
 @WebServlet("/reply/*")
 public class ReplyController extends HttpServlet{
 	
-	private ReplyService service = ReplyServiceImpl.getInstance();
+	// private ReplyService service = ReplyServiceImpl.getInstance();
 	// private Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd - HH:mm:ss").create();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -56,10 +56,10 @@ public class ReplyController extends HttpServlet{
 			
 			
 			}
-			ret = service.selectList(pno,cri,req.getSession().getAttribute("member"));
+			// ret = service.selectList(pno,cri,req.getSession().getAttribute("member"));
 		}else {
 			Long rno = Long.valueOf(uri);
-			ret = service.findBy(rno);
+			// ret = service.findBy(rno);
 		}
         resp.setContentType("application/json; charset=utf-8");
         // resp.getWriter().print(gson.toJson(ret));
@@ -99,10 +99,10 @@ public class ReplyController extends HttpServlet{
 			if(tmpIdx != -1) {
 				pno = Long.valueOf(uri.substring(tmpIdx+1));
 			}
-			service.removeAll(pno);
+			// service.removeAll(pno);
 		}else {
 			Long rno = Long.valueOf(uri);
-			service.remove(rno);
+			// service.remove(rno);
 		}
 	}
 	

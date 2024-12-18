@@ -99,7 +99,9 @@ public class MemberController {
             } catch (UnsupportedEncodingException e) {
               e.printStackTrace();
             }
-        	}
+        	}else if(url == null || url.equals("")){
+            redirectURL = "";
+          }
       return "redirect:/"+redirectURL;
     }else{
       //실패

@@ -76,7 +76,7 @@ implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
 	implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
 
 	// https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml
-	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.18.2'
+	// implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.18.2'
 
 
 	//log4j2
@@ -88,6 +88,11 @@ implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
     implementation 'org.aspectj:aspectjrt:1.9.22.1'
 	// https://mvnrepository.com/artifact/org.aspectj/aspectjweaver
 		implementation 'org.aspectj:aspectjweaver:1.9.22.1'
+
+
+	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
+
 
 
 }

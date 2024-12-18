@@ -30,4 +30,7 @@ mybatis:
   type-aliases-package: shop.youngatae.member_post.vo
   configuration:
     map-underscore-to-camel-case: true
+springdoc:
+  swagger-ui:
+    path: /swag
 

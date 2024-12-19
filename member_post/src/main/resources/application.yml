@@ -4,6 +4,8 @@ server:
   port: 9999
 spring:
   devtools:
+    livereload:
+      enabled: true
     restart:
       enabled: true
       additional-paths:
@@ -11,8 +13,7 @@ spring:
       - src/main/resources
       - src/main/webapp
       additional-exclude: static/**, templates/**
-    livereload:
-      enabled: true
+
   application:
     name: jdbc
   datasource:
@@ -33,4 +34,6 @@ mybatis:
 springdoc:
   swagger-ui:
     path: /swag
+  upload:
+    path: c:/upload
 

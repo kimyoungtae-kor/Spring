@@ -4,14 +4,15 @@
 ${header['Referer']}
     <script>
       
-      //  alert('${msg}');
+       alert('${msg}' + '${url}');
       console.log('${url}');
       let url = '${url}';
-      if(url) {
-        const idx = url.indexOf('?') + 5;
-        url =  url.slice(0, idx) + encodeURIComponent(url.slice(idx+1));
-      }
-      console.log(url);
+      // if(url) {
+      //   const idx = url.indexOf('?') + 5;
+      //   console.log(idx);
+      //   url =  url.slice(0, idx) + encodeURIComponent(url.slice(idx+1));
+      // }
+      // console.log(url);
         <c:choose>
             <c:when test="${not empty url}">
               location.href = url;

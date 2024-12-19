@@ -23,10 +23,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import shop.youngatae.member_post.aop.MyPost;
-import shop.youngatae.member_post.aop.SigninCheck;
+import shop.youngatae.member_post.aop.annotation.MyPost;
+import shop.youngatae.member_post.aop.annotation.SigninCheck;
 import shop.youngatae.member_post.dto.Criteria;
 import shop.youngatae.member_post.dto.PageDto;
+import shop.youngatae.member_post.exception.UnsignedAuthException;
 import shop.youngatae.member_post.service.PostService;
 import shop.youngatae.member_post.vo.Member;
 import shop.youngatae.member_post.vo.Post;
@@ -66,7 +67,7 @@ public class PostController {
     log.info(post);
     log.info(cri);
     post.setCno(cri.getCategory());
-    service.write(post);
+   service.write(post);
     return "redirect:list?" + cri.getQs2();
 
   }
@@ -74,7 +75,7 @@ public class PostController {
   
   @GetMapping("modify")
   // @MyPost(id = "writer")
-  @SigninCheck
+  @SigninCheck @MyPost
   public void modify(@RequestParam("pno") Long pno,Model model,Criteria cri,
   @SessionAttribute(name = "member",required = false) Member member,String writer) {
     log.info(member + "dddddddd");
@@ -85,14 +86,16 @@ public class PostController {
       
     // }
     if(member == null || !member.getId().equals(post.getWriter())){
-      throw new RuntimeException("동일하지 않은 혹은 비로그인");
+      throw new UnsignedAuthException("동일하지 않은 혹은 비로그인");
     }
 
     model.addAttribute("post", post);
   }
   @PostMapping("modify")
-  @SigninCheck @MyPost
-  public String postMethodName(Post post,Criteria cri) {
+  @MyPost 
+  public String postMethodName(Post post,Criteria cri,@SessionAttribute("member") Member member) {
+
+      
       log.info(post);
       log.info(cri);
       service.modify(post);

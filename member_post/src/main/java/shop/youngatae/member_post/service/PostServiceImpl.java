@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import shop.youngatae.member_post.dto.Criteria;
 import shop.youngatae.member_post.dto.PageDto;
 import shop.youngatae.member_post.mapper.AttachMapper;
@@ -21,6 +22,7 @@ import shop.youngatae.member_post.vo.Post;
 
 @AllArgsConstructor
 @Transactional
+@Log4j2
 public class PostServiceImpl implements PostService{
 		private PostMapper mapper;
 		private AttachMapper attachMapper;
@@ -29,11 +31,11 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public int write(Post post) {
 			mapper.write(post);
+			log.info(post);
 			post.getAttachs().forEach(a -> {
 				a.setPno(post.getPno());
 				attachMapper.insert(a);
 			});
-			
 			
 			return 0;
 		

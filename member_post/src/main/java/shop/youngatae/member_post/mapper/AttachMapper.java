@@ -18,6 +18,8 @@ public interface AttachMapper {
 	@Select("SELECT * FROM tbl_attach where pno = #{pno}")
 	List<Attach> selectList(Long pno);
 	
+	@Select("SELECT * FROM tbl_attach where path = #{path}")
+	List<Attach> selectListByPath(String path);
 	
 	@Delete("DELETE FROM tbl_attach Where pno = #{pno}")
 	int delete(Long pno);

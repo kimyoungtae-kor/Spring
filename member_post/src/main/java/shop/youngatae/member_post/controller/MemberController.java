@@ -91,18 +91,40 @@ public class MemberController {
       }
       resp.addCookie(cookie);
       //2. redirect index
-        String redirectURL = req.getContextPath()+"/";
+             String redirectURL = "/";
         	String url = req.getParameter("url");
-        	if(url != null && !url.equals("")) {
-        		try {
-              redirectURL = URLDecoder.decode(url,"utf-8") ;
-            } catch (UnsupportedEncodingException e) {
-              e.printStackTrace();
-            }
-        	}else if(url == null || url.equals("")){
-            redirectURL = "";
-          }
-      return "redirect:/"+redirectURL;
+          log.info(url + ":::::::");
+        	// if(url != null && !url.equals("")) {
+        	// 	try {
+          //     redirectURL = URLDecoder.decode(url,"utf-8");
+          //   } catch (UnsupportedEncodingException e) {
+          //     e.printStackTrace();
+          //   }
+        	// }else if(url == null || url.equals("")){
+          //   redirectURL = "";
+          // }
+        if(url !=null){
+          redirectURL = url;
+        }
+
+        // 2. redirect index
+        return "redirect:"+redirectURL;
+        // return "redirect:/"+redirectURL;
+      // return "redirect:view";
+        // String redirectURL = req.getContextPath()+"/";
+        // 	String url = req.getParameter("url");
+        //   log.info(url + ":::::::");
+        // 	if(url != null && !url.equals("")) {
+        // 		try {
+        //       redirectURL = URLDecoder.decode(url,"utf-8");
+        //     } catch (UnsupportedEncodingException e) {
+        //       e.printStackTrace();
+        //     }
+        // 	}else if(url == null || url.equals("")){
+        //     redirectURL = "";
+        //   }
+        // return "redirect:/"+redirectURL;
+      // return "redirect:view";
     }else{
       //실패
       // return "redirect:signin?msg=failed";
@@ -110,6 +132,26 @@ public class MemberController {
       rttr.addFlashAttribute("msg","failed");
       return "redirect:signin";
     }
+      //       String redirectURL = "/";
+      //   	String url = req.getParameter("url");
+      //     log.info(url + ":::::::");
+      //   	// if(url != null && !url.equals("")) {
+      //   	// 	try {
+      //     //     redirectURL = URLDecoder.decode(url,"utf-8");
+      //     //   } catch (UnsupportedEncodingException e) {
+      //     //     e.printStackTrace();
+      //     //   }
+      //   	// }else if(url == null || url.equals("")){
+      //     //   redirectURL = "";
+      //     // }
+      //   if(url !=null){
+      //     redirectURL = url;
+      //   }
+
+      //   // 2. redirect index
+      //   return "redirect:"+redirectURL;
+      //   // return "redirect:/"+redirectURL;
+      // // return "redirect:view";
     
   }
   @RequestMapping("logout")

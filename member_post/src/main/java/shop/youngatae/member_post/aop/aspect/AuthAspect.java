@@ -1,4 +1,4 @@
-package shop.youngatae.member_post.aop;
+package shop.youngatae.member_post.aop.aspect;
 
 
 
@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.Arrays;
 
+import org.apache.logging.log4j.core.config.Order;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -17,6 +18,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import shop.youngatae.member_post.exception.NotMyPostException;
+import shop.youngatae.member_post.exception.UnsignedAuthException;
 import shop.youngatae.member_post.vo.Member;
 import shop.youngatae.member_post.vo.Post;
 
@@ -28,17 +31,7 @@ public class AuthAspect {
   private HttpSession session;
   private HttpServletRequest req;
   private HttpServletResponse resp;
-  @Before("@annotation(shop.youngatae.member_post.aop.MyPost)")
-  public void myPost(JoinPoint joinPoint, MyPost myPost){
-    Object o = session.getAttribute("member");
-    String id = ((Member)o).getId();
-    Object[] args = joinPoint.getArgs();
-
-    // String writerParam = myPost.value();
-     log.info(Arrays.toString(args));
-    log.info(id);
-    // log.info(writerParam);
-  }
+  
   @Before("@annotation(shop.youngatae.member_post.aop.SigninCheck)")
   public void signinCheck(JoinPoint jp) throws IOException{
     log.info(req.getRequestURI());
@@ -49,5 +42,25 @@ public class AuthAspect {
       resp.sendRedirect("/msg?msg="+URLEncoder.encode("로그인이 필요한 페이지입니다", "utf-8") + "&url="+url);
 
     }
+  }
+  @Before("@annotation(shop.youngatae.member_post.aop.MyPost)")
+  public void myPost(JoinPoint joinPoint) throws IOException{
+    Object o = session.getAttribute("member");
+    if(o == null){
+      throw new UnsignedAuthException("비로그인상태");
+    }
+    String id = ((Member)o).getId();
+    Object[] args = joinPoint.getArgs();
+    
+    for(Object obj : args){
+      if(((Post)obj).getWriter().equals(id)){
+        throw new NotMyPostException("본인 게시글 아님");
+      }
+    }
+
+    // String writerParam = myPost.value();
+     log.error(Arrays.toString(args));
+    log.error(id);
+    // log.info(writerParam);
   }
 }

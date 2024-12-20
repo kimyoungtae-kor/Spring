@@ -1,0 +1,7 @@
+<mapper namespace="shop.youngatae.mysecondpratice.mapper.PostMapper">
+
+    <select id="findAll" resultType="com.example.board.entity.Post">
+        SELECT * FROM tbl_post ORDER BY regdate DESC
+    </select>
+
+</mapper>

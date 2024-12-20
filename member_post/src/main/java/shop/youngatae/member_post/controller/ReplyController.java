@@ -16,6 +16,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import shop.youngatae.member_post.dto.Criteria;
@@ -36,6 +37,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RequestMapping("reply")
 @Log4j2
 @AllArgsConstructor
+@Tag(name = "reply", description = "댓글 관리 API를 처리합니다.")
 public class ReplyController {
   private ReplyService service;
   //목록조회

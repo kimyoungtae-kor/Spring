@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import lombok.extern.log4j.Log4j2;
 import shop.youngatae.member_post.dto.Criteria;
+import shop.youngatae.member_post.vo.Post;
 
 @SpringBootTest
 @Log4j2
@@ -33,5 +34,10 @@ public class PostMapperTests {
   @Test
   public void testView() {
     log.info(mapper.selectOne(126L));
+  }
+  @Test
+  public void testWrite(){
+    // Post post = Post.builder().title("123").writer("test002").content("1132").cno(2).build();
+    // log.info(mapper.write(post));
   }
 }

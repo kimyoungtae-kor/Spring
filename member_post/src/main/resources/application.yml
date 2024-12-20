@@ -8,6 +8,13 @@ spring:
       enabled: true
     restart:
       enabled: true
+    servlet:
+      multpart:
+        max-request-size:
+          50MB
+        file-size-threshold:
+          10MB
+        location: c:/upload
       additional-paths:
       - src/main/java
       - src/main/resources

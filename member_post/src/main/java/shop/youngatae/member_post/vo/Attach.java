@@ -13,13 +13,20 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.extern.log4j.Log4j2;
 import net.coobird.thumbnailator.Thumbnailator;
 import shop.youngatae.member_post.utils.Commons;
 
-@Data
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode(of = "uuid")
 @Builder
 @AllArgsConstructor
 @Alias("attach")
@@ -41,8 +48,9 @@ public class Attach {
 			ext = origin.substring(dotIdx);
 		}
 		log.info(UPLOAD_PATH);
+
 		uuid = UUID.randomUUID().toString();
-		String realName = uuid + ext;
+		String realName = uuid = uuid + ext;
 		path = getTodayStr();
 		File parentPath= new File(Commons.UPLOAD_PATH, path);
 		if(!parentPath.exists()) {
@@ -75,4 +83,19 @@ public class Attach {
 	public String getTodayStr() {
     return new SimpleDateFormat("yyyy/MM/dd").format(System.currentTimeMillis());
   }
+	public static Attach fromFile(File file){
+		
+		return Attach.builder().uuid(file.getName()).build();
+	}
+	//위에 어노테이션 equls랑똑같은 하드코딩
+	@Override
+	public boolean equals(Object obj){
+		return obj != null && obj instanceof Attach && uuid.equals(((Attach)obj).uuid);
+	}
+	//확인하는목적으로만쓰임
+	@Override
+	public int hashCode(){
+		return uuid.hashCode();
+	}
+	
 }

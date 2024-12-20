@@ -101,6 +101,10 @@ implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
 	implementation 'net.coobird:thumbnailator:0.4.20'
 
 
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-quartz
+	implementation 'org.springframework.boot:spring-boot-starter-quartz:3.4.0'
+
+
 }
 
 tasks.named('test') {

@@ -5,6 +5,11 @@ import lombok.Setter;
 import lombok.ToString;
 import shop.youngatae.todo.domain.TodoEntity;
 
+//dto수정
+//컨트롤러수정
+//서비스수정
+
+
 @Getter
 @Setter
 @ToString
@@ -15,7 +20,7 @@ public class TodoListDto {
   public TodoListDto(TodoEntity entity) {
     id = entity.getId();
     task = entity.getTask();
-    done = entity.isDone();  
+    done = entity.isDone();
   }
   // dto >> entity
   public TodoEntity todoEntity(){

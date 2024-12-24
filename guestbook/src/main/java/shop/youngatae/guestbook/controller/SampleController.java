@@ -12,6 +12,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import lombok.extern.log4j.Log4j2;
 import shop.youngatae.guestbook.domain.SampleDto;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @Controller
@@ -47,11 +49,16 @@ public class SampleController {
   public void ex03() {
     log.info("ex03");
   }
-  // LongStream.rangeClosed(1, 20)
-  // .mapToObj(i->SampleDto.builder()
-  //   .sno(i)
-  //   .first("first"+i)
-  //   .last("last"+i)
-  //   .regTime(LocalDateTime.now())
-  // .build())
+
+  @GetMapping("exLayout1")
+  public void exLayout1() {
+      log.info("exLayout1()");
+  }
+  @GetMapping({"exLayout2","exTemplate","exSidebar"})
+  public void exLayout2() {
+    log.info("exLayout2()");
+  }
+  
+  
+  
 }

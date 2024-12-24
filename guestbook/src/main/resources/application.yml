@@ -18,6 +18,6 @@ spring:
       additional-paths:
       - src/main/java
       - src/main/resources
-server:
-  servlet:
-    context-path: /guestbook
+# server:
+#   servlet:
+#     context-path: /guestbook

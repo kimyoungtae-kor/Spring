@@ -15,7 +15,7 @@
         <Logger level="info" name="jdbc.sqltiming" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger> -->
-        <Logger level="info" name="shop.youngatae" additivity="false">
+        <!-- <Logger level="info" name="shop.youngatae" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
         <Logger level="warn" name="jdbc.connection" additivity="false">
@@ -29,7 +29,7 @@
         </Logger>
         <Logger level="warn" name="jdbc.resultset" additivity="false">
             <AppenderRef ref="Console"/>
-        </Logger>
+        </Logger> -->
 
     </Loggers>
 </Configuration>

@@ -9,13 +9,14 @@
   <script src='main.js'></script>
 </head>
 <body>
-  <ul>
-    <li th:each="dto : ${list}">
-      <a th:href="@{/sample/exView(sno=${dto.sno},first=${dto.first + dto.last})}">
-        [[${#numbers.formatInteger(dto.sno, 5)}]] --- [[${#temporals.format(dto.regTime, 'yyyy/MM/dd HH:mm:ss.SSS')}]]
-      </a>
-      
-    </li>
-  </ul>
+  <!-- 푸터와 헤더 연결할 인클루드 -->
+    <h1>Fragment Test</h1>
+
+    <h1>Layout 1 - 1</h1>
+    <div th:replace="~{/fragments/fragment1 :: part1}"></div>
+    <h1>Layout 1 - 2</h1>
+    <div th:insert="~{/fragments/fragment1 :: part2}"></div>
+    <h1>Layout 1 - 1</h1>
+    <div th:replace="~{/fragments/fragment1}"></div>
 </body>
 </html>

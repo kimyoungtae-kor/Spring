@@ -40,7 +40,7 @@ public class GuestbookServiceImpl implements GuestbookService{
 
   @Override
   public void modify(GuestbookModifyDto dto) {
-    repository.save(dto.toEntity());
+    log.info(repository.save(dto.toEntity()));
   }
 
   @Override

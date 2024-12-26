@@ -6,10 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.log4j.Log4j2;
+import shop.youngatae.guestbook.domain.dto.GuestbookDto;
 import shop.youngatae.guestbook.domain.dto.PageRequestDto;
 import shop.youngatae.guestbook.service.GuestbookService;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -25,5 +27,11 @@ public class GuestbookController {
       model.addAttribute("result", service.list(dto));
       return "/guestbook/list";
     }
-    
+//      @GetMapping("/view/{gno}")
+//     public String view(@PathVariable("gno") Long gno, Model model) {
+
+//         GuestbookDto guestbook = guestbookService.getDetail(gno);
+//         model.addAttribute("guestbook", guestbook);
+//         return "guestbook/view";
+//     }
 }

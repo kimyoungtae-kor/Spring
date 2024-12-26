@@ -22,7 +22,7 @@ import lombok.ToString;
 @Table(name = "tbl_guestbook")
 @Setter
 //setter를 안넣으면 final 선언안해도된다
-public class GuestbookEntity extends BaseEntity{
+public class Guestbook extends BaseEntity{
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)//strategy : 전략
   private Long gno;//게시글번호

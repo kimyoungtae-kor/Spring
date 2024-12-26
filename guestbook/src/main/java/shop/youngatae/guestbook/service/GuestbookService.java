@@ -1,17 +1,43 @@
 package shop.youngatae.guestbook.service;
 
-import java.util.List;
 
-import shop.youngatae.guestbook.domain.dto.GuestbookListDto;
+import shop.youngatae.guestbook.domain.dto.GuestbookDto;
 import shop.youngatae.guestbook.domain.dto.GuestbookModifyDto;
 import shop.youngatae.guestbook.domain.dto.GuestbookViewDto;
-import shop.youngatae.guestbook.domain.dto.GuestbookWriteDto;
+import shop.youngatae.guestbook.domain.dto.PageRequestDto;
+import shop.youngatae.guestbook.domain.dto.PageResultDto;
+import shop.youngatae.guestbook.domain.entity.Guestbook;
 
 public interface GuestbookService {
-  void write(GuestbookWriteDto dto);
+  Long write(GuestbookDto dto);
+  PageResultDto<GuestbookDto,Guestbook> list(PageRequestDto dto);
   void modify(GuestbookModifyDto dto);
   void remove(Long gno);
 
-  List<GuestbookListDto> list();
+  
   GuestbookViewDto get(Long dto);
+
+  //entity타입을 반환
+
+  default Guestbook toEntity(GuestbookDto dto){
+    return Guestbook.builder()
+    .gno(dto.getGno())
+    .title(dto.getTitle())
+    .content(dto.getContent())
+    .writer(dto.getWriter())
+    .build();
+  }
+//dto타입을반환
+//이름은 to DTO
+//entity >>>dto 변환 메서드 정의
+  default GuestbookDto toDto(Guestbook entity){
+    return GuestbookDto.builder()
+    .gno(entity.getGno())
+    .title(entity.getTitle())
+    .content(entity.getContent())
+    .writer(entity.getWriter())
+    .regDate(entity.getRegDate())
+    .modDate(entity.getModDate())
+    .build();
+  }
 }

@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import shop.youngatae.guestbook.domain.entity.GuestbookEntity;
+import shop.youngatae.guestbook.domain.entity.Guestbook;
 
 @Getter
 @Setter
@@ -21,8 +21,8 @@ public class GuestbookWriteDto {
   private String writer;
 
 
-  public GuestbookEntity toEntity(){
-    return GuestbookEntity.builder()
+  public Guestbook toEntity(){
+    return Guestbook.builder()
     .title(title)
     .content(content)
     .writer(writer)

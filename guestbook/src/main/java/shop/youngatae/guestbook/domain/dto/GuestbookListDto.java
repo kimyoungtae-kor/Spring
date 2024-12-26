@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import shop.youngatae.guestbook.domain.entity.GuestbookEntity;
+import shop.youngatae.guestbook.domain.entity.Guestbook;
 
 @Getter
 @Setter
@@ -25,7 +25,7 @@ public class GuestbookListDto {
   private LocalDateTime regDate;
   private LocalDateTime modDate;
 
-  public GuestbookListDto(GuestbookEntity entity){
+  public GuestbookListDto(Guestbook entity){
     gno = entity.getGno();
     title = entity.getTitle();
     content = entity.getContent();

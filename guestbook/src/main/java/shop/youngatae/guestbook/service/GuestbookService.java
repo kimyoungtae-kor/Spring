@@ -11,11 +11,12 @@ import shop.youngatae.guestbook.domain.entity.Guestbook;
 public interface GuestbookService {
   Long write(GuestbookDto dto);
   PageResultDto<GuestbookDto,Guestbook> list(PageRequestDto dto);
-  void modify(GuestbookModifyDto dto);
+  void modify(GuestbookDto dto);
   void remove(Long gno);
 
+  GuestbookDto read(Long gno);
   
-  GuestbookViewDto get(Long dto);
+  // GuestbookViewDto get(Long dto);
 
   //entity타입을 반환
 

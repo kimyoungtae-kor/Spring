@@ -58,7 +58,7 @@ public class GuestbookServicetests {
         .writer("수정 작성자")
         .build();
 
-      service.modify(dto);
+      // service.modify(dto);
   }
 
 
@@ -71,7 +71,8 @@ public class GuestbookServicetests {
     // service.list(new PageRequestDto(2,10)).getDtoList().forEach(log::info);
     
     
-    PageResultDto<GuestbookDto,Guestbook> dto = service.list(new PageRequestDto(2,10));
+    // PageResultDto<GuestbookDto,Guestbook> dto = service.list(new PageRequestDto(2,10));
+        PageResultDto<GuestbookDto,Guestbook> dto = service.list(new PageRequestDto());
     log.info(dto);
     dto.getPageList().forEach(log::info);
   }

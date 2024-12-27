@@ -53,7 +53,7 @@ public class TodoService {
   public void modify(Long id){
     Optional<TodoEntity> entity = repository.findById(id);
     entity.ifPresent(e -> {e.setDone(true); repository.save(e);});
-    repository.save(TodoEntity.builder().id(id).done(true).task("직접준거").build());
+    // repository.save(TodoEntity.builder().id(id).done(true).task("직접준거").build());
     repository.updateTodoDoneById(id);
   }
 

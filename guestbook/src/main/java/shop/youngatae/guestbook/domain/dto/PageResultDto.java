@@ -24,7 +24,7 @@ public class PageResultDto<D,E> {
   private int start, end;//하단의 페이지 넘버링
   private boolean prev,next; //하단의 페이지 버튼
 
-  private List<Integer> pageList; //스타트 앤드값을가진 게시글수?
+  private List<Integer> pageList; //스타트 앤드값을가진 페이지번호리스트
 
 
   public PageResultDto(Page<E> result, Function<E,D> fn){

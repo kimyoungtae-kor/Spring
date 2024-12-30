@@ -9,13 +9,15 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 
+import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
 import shop.youngatae.guestbook.domain.dto.GuestbookDto;
-import shop.youngatae.guestbook.domain.dto.GuestbookModifyDto;
 import shop.youngatae.guestbook.domain.dto.PageRequestDto;
 import shop.youngatae.guestbook.domain.dto.PageResultDto;
 import shop.youngatae.guestbook.domain.entity.Guestbook;
@@ -36,6 +38,9 @@ public class GuestbookServicetests {
   //   log.info(service.list());
   // }
   @Test
+  @DisplayName("글 작성 서비스 테스트")
+  @Transactional
+  @Rollback(true)
   public void writer2(){
     GuestbookDto dto = GuestbookDto.builder()
     .title("작성글테스트")
@@ -50,20 +55,21 @@ public class GuestbookServicetests {
   // private LocalDateTime regDate,modDate;  
   }
   @Test
+  @Transactional
   public void update(){
-    GuestbookModifyDto dto = GuestbookModifyDto.builder()
+    GuestbookDto dto = GuestbookDto.builder()
         .gno(1L)
         .title("수정제목12")
         .content("수정 내용")
         .writer("수정 작성자")
         .build();
 
-      // service.modify(dto);
+      service.modify(dto);
   }
 
 
   @Test
-  public void testListPage(){
+  public void testList(){
         // PageRequestDto dto = new PageRequestDto(99,3);
     // log.info(service.list(dto));
 
@@ -72,9 +78,10 @@ public class GuestbookServicetests {
     
     
     // PageResultDto<GuestbookDto,Guestbook> dto = service.list(new PageRequestDto(2,10));
-        PageResultDto<GuestbookDto,Guestbook> dto = service.list(new PageRequestDto());
-    log.info(dto);
-    dto.getPageList().forEach(log::info);
+    PageRequestDto dto = PageRequestDto.builder().page(3).size(10).type("TC").keyword("!제목").build();
+    PageResultDto<GuestbookDto,Guestbook> resultDto = service.list(dto);
+    log.info(resultDto);
+    resultDto.getDtoList().forEach(log::info);
   }
   @Test
   public void testResultDto(){

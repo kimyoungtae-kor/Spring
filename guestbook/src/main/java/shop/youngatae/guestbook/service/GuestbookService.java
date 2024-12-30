@@ -2,8 +2,6 @@ package shop.youngatae.guestbook.service;
 
 
 import shop.youngatae.guestbook.domain.dto.GuestbookDto;
-import shop.youngatae.guestbook.domain.dto.GuestbookModifyDto;
-import shop.youngatae.guestbook.domain.dto.GuestbookViewDto;
 import shop.youngatae.guestbook.domain.dto.PageRequestDto;
 import shop.youngatae.guestbook.domain.dto.PageResultDto;
 import shop.youngatae.guestbook.domain.entity.Guestbook;

@@ -16,10 +16,6 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import shop.youngatae.guestbook.domain.dto.GuestbookDto;
-import shop.youngatae.guestbook.domain.dto.GuestbookListDto;
-import shop.youngatae.guestbook.domain.dto.GuestbookModifyDto;
-import shop.youngatae.guestbook.domain.dto.GuestbookViewDto;
-import shop.youngatae.guestbook.domain.dto.GuestbookWriteDto;
 import shop.youngatae.guestbook.domain.dto.PageRequestDto;
 import shop.youngatae.guestbook.domain.dto.PageResultDto;
 import shop.youngatae.guestbook.domain.entity.Guestbook;
@@ -72,7 +68,9 @@ public class GuestbookServiceImpl implements GuestbookService{
   @Override
   public PageResultDto<GuestbookDto, Guestbook> list(PageRequestDto dto) {
     Pageable pageable = dto.getPageable(Sort.by(Direction.DESC,"gno"));
-    Page<Guestbook> page = repository.findAll(pageable);
+    BooleanBuilder booleanBuilder = getSearch(dto);
+    Page<Guestbook> page = repository.findAll(booleanBuilder,pageable);
+    
     // Function<Guestbook,GuestbookDto> fn = e -> toDto(e);
     PageResultDto<GuestbookDto,Guestbook> resultDto = new PageResultDto<>(page, e -> toDto(e));
     return resultDto;

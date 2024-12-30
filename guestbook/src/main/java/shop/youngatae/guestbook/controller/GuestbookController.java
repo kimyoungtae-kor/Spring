@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.log4j.Log4j2;
 import shop.youngatae.guestbook.domain.dto.GuestbookDto;
-import shop.youngatae.guestbook.domain.dto.GuestbookModifyDto;
 import shop.youngatae.guestbook.domain.dto.PageRequestDto;
 import shop.youngatae.guestbook.service.GuestbookService;
 
@@ -33,6 +32,7 @@ public class GuestbookController {
       model.addAttribute("result", service.list(dto));
       return "/guestbook/list";
     }
+    
 
     @GetMapping("register")
     public void register() {
@@ -54,6 +54,8 @@ public class GuestbookController {
     public String postMethodName(GuestbookDto dto,PageRequestDto pageDto, RedirectAttributes rttr) {
         service.modify(dto);
         rttr.addAttribute("page",pageDto.getPage());
+        rttr.addAttribute("type",pageDto.getType());
+        rttr.addAttribute("keyword",pageDto.getKeyword());
         return "redirect:list";
     }
     
@@ -68,7 +70,9 @@ public class GuestbookController {
     @PostMapping("remove2")
     public String remove2(GuestbookDto dto,PageRequestDto pageDto, RedirectAttributes rttr) {
         service.remove(dto.getGno());
-        rttr.addAttribute("page",pageDto.getPage());
+        rttr.addAttribute("page",1);
+        rttr.addAttribute("type",pageDto.getType());
+        rttr.addAttribute("keyword",pageDto.getKeyword());
         return "redirect:list";
     }
     

@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort.Direction;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 
+import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
 import shop.youngatae.guestbook.domain.entity.Guestbook;
 // import shop.youngatae.guestbook.domain.entity.QGuestbook;
@@ -30,6 +31,7 @@ public class GuestBookRepositoryTests {
     log.info(repository);
   }
   @Test
+  @Transactional
   public void testInsert(){
     repository.saveAll(IntStream.rangeClosed(1, 300).mapToObj(i->{
       return Guestbook.builder()
@@ -41,6 +43,7 @@ public class GuestBookRepositoryTests {
     );
   }
   @Test
+  
   public void testSelect(){
     repository.findAll().forEach(log::info);
   }
@@ -49,6 +52,7 @@ public class GuestBookRepositoryTests {
     log.info(repository.findById(1L));
   }
   @Test
+  @Transactional
   public void testupdate(){
     // Long gno = 1L;
     // Optional<Guestbook> opt = repository.findById(gno);

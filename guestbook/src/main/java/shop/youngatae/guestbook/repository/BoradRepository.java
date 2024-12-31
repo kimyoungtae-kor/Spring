@@ -10,9 +10,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import shop.youngatae.guestbook.domain.entity.Board;
+import shop.youngatae.guestbook.repository.search.SearchBoardRepository;
 
 
-public interface BoradRepository extends JpaRepository<Board,Long>{
+public interface BoradRepository extends JpaRepository<Board,Long>, SearchBoardRepository{
   @Query("select b,m from tbl_board b left join member m where b.bno = :bno")
   Object getBoradWithMember(@Param("bno") Long bno);
   
@@ -33,11 +34,7 @@ public interface BoradRepository extends JpaRepository<Board,Long>{
   //       "left join member m \r\n" + //
   //       "left join tbl_reply r  on b = r.board group by b having b = :bno"
   //       , countQuery = "select count(r) from tbl_reply r")
-  @Query(value = "select count(r),b,m from tbl_board b \r\n" + //
-  "left join member m \r\n" + //
-  "left join tbl_reply r  on b = r.board \r\n"+ 
-  "where b.bno = :bno\r\n"
-  , countQuery = "select count(b) from tbl_board b")
-  Object[] getBoardByBno(@Param("bno") Long bno);
+  @Query("select m, b, count(r) from tbl_board b left join member m left join tbl_reply r on b=r.board where b.bno= :bno")
+  Object getBoardByBno(@Param("bno") Long bno);
   
 }

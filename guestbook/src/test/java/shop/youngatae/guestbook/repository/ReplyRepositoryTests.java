@@ -49,5 +49,15 @@ public class ReplyRepositoryTests {
     log.info(reply.getBoard().getMember().getName());
 
   }
+  @Test
+  public void testDelete(){
+    
+  }
+  @Test
+  @Transactional
+  @Rollback(false)
+  public void testDeleteByBno(){
+    repository.deleteByBoardBno(801L);
+  }
    
 }

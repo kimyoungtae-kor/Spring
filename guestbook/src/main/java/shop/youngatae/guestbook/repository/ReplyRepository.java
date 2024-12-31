@@ -7,5 +7,5 @@ import shop.youngatae.guestbook.domain.entity.Reply;
 
 @Repository
 public interface ReplyRepository extends JpaRepository<Reply,Long>{
-  
+  void deleteByBoardBno(Long bno);
 }

@@ -16,6 +16,7 @@ import org.springframework.test.annotation.Rollback;
 
 import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
+import shop.youngatae.guestbook.domain.dto.PageRequestDto;
 import shop.youngatae.guestbook.domain.entity.Board;
 import shop.youngatae.guestbook.domain.entity.Member;
 import shop.youngatae.guestbook.domain.entity.Reply;
@@ -71,11 +72,15 @@ public class BoardRePostioryTests {
   }
   @Test
   public void testgetBoardByBno(){
-    Object[] arr = repository.getBoardByBno(801L);
-    log.info(Arrays.toString(arr));
+    Object[] arr = (Object[])repository.getBoardByBno(801L);
+    log.info(arr);
   }
   @Test
-  public void testModify(){
-
+  public void testSearch1(){
+    repository.search1();
+  }
+  @Test
+  public void testSearchPage(){
+    repository.searPage("TC", "1",PageRequest.of(0,10,Sort.by(Direction.DESC,"bno","title")));
   }
 }

@@ -4,7 +4,11 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import shop.youngatae.guestbook.domain.dto.BoardDto;
+import shop.youngatae.guestbook.domain.dto.GuestbookDto;
+import shop.youngatae.guestbook.domain.dto.PageRequestDto;
+import shop.youngatae.guestbook.domain.dto.PageResultDto;
 import shop.youngatae.guestbook.domain.entity.Board;
+import shop.youngatae.guestbook.domain.entity.Guestbook;
 import shop.youngatae.guestbook.domain.entity.Member;
 
 public interface BoardService {
@@ -21,21 +25,25 @@ public interface BoardService {
     .member(Member.builder().email(dto.getMemberEmail()).name(dto.getMemberName()).build())
     .build();
   }
-  default BoardDto toDto(Object[] arr){
-    System.out.println(Arrays.toString(arr));
+  default BoardDto toDto(Object[] arr) {
     if(arr == null) return null;
-      BoardDto.BoardDtoBuilder builder = BoardDto.builder();
-    for(Object o : arr){
+
+    BoardDto.BoardDtoBuilder builder = BoardDto.builder();
+    boolean containBoard = false;
+
+    for(Object o : arr) {
+      if(o == null) continue;
+
       Class<?> cls = o.getClass();
-      System.out.println(o);
-      System.out.println(cls);
-      if(cls == int.class || cls == Integer.class){
+      if(cls == Long.class || cls == long.class) {
         builder.replyCnt(Integer.parseInt(o.toString()));
-      }else if (cls == Member.class) {
-        builder.memberEmail(((Member) o).getEmail());
-        builder.memberName(((Member) o).getName());
       }
-      else if (cls == Board.class) {
+      else if(cls == Member.class) {
+        builder.memberEmail(((Member)o).getEmail());
+        builder.memberName(((Member)o).getName());
+      }
+      else if(cls == Board.class) {
+        containBoard = true;
         Board b = (Board)o;
         builder.bno(b.getBno());
         builder.title(b.getTitle());
@@ -44,18 +52,15 @@ public interface BoardService {
         builder.modDate(b.getModDate());
       }
     }
-    // return BoardDto.builder().build();
-    
-    return builder.build();
-    // .bno(.getBno())
-    // .title(board.getTitle())
-    // .content(board.getContent())
-    // .memberEmail(board.getMember().getEmail())
-    // .memberName(board.getMember().getName())
+    return containBoard ? builder.build() : null;
   }
   Long register(BoardDto dto);
 
   BoardDto get(Long bno);
 
+  void remove(Long bno);
 
+  void modify(BoardDto dto);
+
+  PageResultDto<BoardDto,Object[]> list(PageRequestDto dto);
 }

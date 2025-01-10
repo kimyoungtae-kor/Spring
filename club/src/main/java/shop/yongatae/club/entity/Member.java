@@ -3,6 +3,7 @@ package shop.yongatae.club.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -20,7 +21,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@ToString
+// @ToString
 public class Member extends BaseEntity{
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,8 +32,7 @@ public class Member extends BaseEntity{
   private String password;
 
   private String name;
-  
-  private boolean fromSocial;
+  private Boolean fromSocial;
 
   @Builder.Default
   @ElementCollection(fetch = FetchType.LAZY)

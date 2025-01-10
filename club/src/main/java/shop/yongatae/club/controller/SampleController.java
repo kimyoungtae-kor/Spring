@@ -1,5 +1,6 @@
 package shop.yongatae.club.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,26 +22,43 @@ import shop.yongatae.club.security.dto.AuthMemberDto;
 public class SampleController {
   
   @GetMapping("all")
-  public void exAll() {
+  public void exAll(@AuthenticationPrincipal AuthMemberDto dto) {
     UsernamePasswordAuthenticationToken token;
     AuthenticationManager manager ;
     AuthenticationProvider provider;
+    log.info(dto);
     log.info("ex all");
   }
   @GetMapping("member")
-  public void exMember() {
+  public void exMember(@AuthenticationPrincipal AuthMemberDto dto) {
+    log.info(dto);
     log.info("ex member");
   }
   @GetMapping("admin")
-  public void exAdmin() {
+  @PreAuthorize("hasRole('ADMIN')")
+  public void exAdmin(@AuthenticationPrincipal AuthMemberDto dto) {
+    log.info(dto);
     log.info("ex admin");
   }
 
   @GetMapping("api")
+  @PreAuthorize("isAuthenticated()")
+  // @PreAuthorize("isAnonymous()") <<비회원만
   @ResponseBody
   public AuthMemberDto getMethodName(@AuthenticationPrincipal AuthMemberDto dto) {
       return dto;
   }
+  
+  @GetMapping("exMemberOnly")
+  @ResponseBody
+  @PreAuthorize("#dto != null && #dto.username eq \"user100@youngatae.shop\"")
+  public String exMemberOnly(@AuthenticationPrincipal AuthMemberDto dto) {
+    log.info(dto.getUsername());  
+    return dto.getEmail();
+  }
+
+
+  
   
   
   

@@ -26,7 +26,11 @@ public class MyMemberUserDetailsService implements UserDetailsService{
     if(member == null){
       throw new UsernameNotFoundException(username);
     }
-    AuthMemberDto authMemberDto = new AuthMemberDto(member.getEmail(), member.getPassword(), member.getMno(), member.isFromSocial(), 
+    log.info(member);
+    log.info(member.getEmail());
+    log.info(member.getPassword());
+    log.info(member.getRoleSet());
+    AuthMemberDto authMemberDto = new AuthMemberDto(member.getEmail(), member.getPassword(), member.getMno(), member.getFromSocial(), 
     member.getName(),member.getRoleSet().stream().map(role -> new SimpleGrantedAuthority("ROLE_"+role.name())).toList());
     // TODO Auto-generated method stub
     return authMemberDto;

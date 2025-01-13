@@ -24,7 +24,9 @@ public interface NoteService {
     // String email = Optional.ofNullable(note.getMember())
     //         .map(Member::getEmail)
     //         .orElse("No Writer");
-
+    // if (note == null) {
+    //     throw new IllegalArgumentException("Note 객체가 null입니다.");
+    // }
 
 
     

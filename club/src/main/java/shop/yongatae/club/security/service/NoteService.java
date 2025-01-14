@@ -41,8 +41,9 @@ public interface NoteService {
     .build();
   }
   Long register(NoteDto dto);
-  NoteDto get(Long num);
+  Optional<NoteDto> get(Long num);
   int modify(NoteDto noteDto);
   int remove(Long num);
   List<NoteDto> list(String email);
+  List<NoteDto> listAll();
 }

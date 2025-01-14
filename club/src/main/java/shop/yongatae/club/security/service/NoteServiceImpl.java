@@ -1,6 +1,7 @@
 package shop.yongatae.club.security.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,8 @@ public class NoteServiceImpl implements NoteService{
   MemberRepository repository2;
   @Override
   @Transactional
-  public NoteDto get(Long num) {
-    return toDto(repository.findByNum(num));
+  public Optional<NoteDto> get(Long num) {
+    return repository.findById(num).map(this::toDto);
   }
 
   @Override
@@ -48,12 +49,17 @@ public class NoteServiceImpl implements NoteService{
   }
 
   @Override
-public List<NoteDto> list(String email) {
-    return repository.findByMemberEmail(email)
-            .stream()
-            .map(note -> toDto(note))
-            .collect(Collectors.toList());
-}
+  public List<NoteDto> list(String email) {
+      return repository.findByMemberEmail(email)
+              .stream()
+              .map(note -> toDto(note))
+              .collect(Collectors.toList());
+  }
+
+  @Override
+  public List<NoteDto> listAll() {
+    return repository.findAll().stream().map(this::toDto).toList();
+  }
 
   
 }

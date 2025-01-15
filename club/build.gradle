@@ -63,6 +63,15 @@ dependencies {
 
 		// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
+
+// https://mvnrepository.com/artifact/software.amazon.awssdk/s3
+// testImplementation 'software.amazon.awssdk:s3:2.29.51'
+// https://mvnrepository.com/artifact/software.amazon.awssdk/sdk-core
+implementation 'software.amazon.awssdk:sdk-core:2.20.112'
+
+		implementation 'software.amazon.awssdk:s3'
+		implementation platform('software.amazon.awssdk:bom:2.20.112')
+
 }
 
 tasks.named('test') {

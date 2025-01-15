@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import jakarta.persistence.EntityManager;
 import shop.yongatae.club.entity.Member;
 import shop.yongatae.club.entity.Note;
 import shop.yongatae.club.repository.MemberRepository;
@@ -20,9 +19,8 @@ public class NoteServiceImpl implements NoteService{
   @Autowired
   private NoteRepository repository;
   @Autowired
-  private EntityManager manager;
-  @Autowired
-  MemberRepository repository2;
+  private MemberRepository repository2;
+
   @Override
   @Transactional
   public Optional<NoteDto> get(Long num) {
@@ -37,6 +35,8 @@ public class NoteServiceImpl implements NoteService{
 
   @Override
   public Long register(NoteDto dto) {
+    Member member = repository2.findByEmail(dto.getWriter());
+    dto.setMno(member.getMno());
     Note note = toEntity(dto);
     repository.save(note);
     return note.getNum();

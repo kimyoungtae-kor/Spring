@@ -35,4 +35,5 @@ out/
 
 ### VS Code ###
 .vscode/
-**/application-oauth.yml
+application-oauth.yml
+application-s3.yml

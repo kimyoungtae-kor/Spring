@@ -42,6 +42,7 @@ public class NoteController {
   
   @PostMapping("register")
   public Long PostMethod(@RequestBody NoteDto dto) {
+      log.info(dto+ "=============================");
       return service.register(dto);
   }
   @SuppressWarnings("unchecked")

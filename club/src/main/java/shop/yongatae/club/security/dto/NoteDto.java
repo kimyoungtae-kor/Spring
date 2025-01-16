@@ -1,6 +1,8 @@
 package shop.yongatae.club.security.dto;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.Builder.Default;
 
 @Getter
 @Setter
@@ -23,4 +26,7 @@ public class NoteDto {
   private String writer;
   private Long mno;
   private LocalDateTime regDate,modDate;
+
+  @Default
+  private List<AttachDto> attachDtos = new ArrayList<>();
 }

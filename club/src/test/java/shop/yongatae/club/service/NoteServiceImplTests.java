@@ -61,4 +61,9 @@ public class NoteServiceImplTests {
   public void testREmove(){
     service.remove(6L);
   }
+    @Test
+    public void testRead(){
+      NoteDto dto = service.get(27L).get();
+      dto.getAttachDtos().forEach(log::info);
+    }
   }

@@ -41,13 +41,14 @@ public class NoteController {
   }
   
   @PostMapping("register")
-  public Long PostMethod(@RequestBody NoteDto dto) {
+  public Long write(@RequestBody NoteDto dto) {
       log.info(dto+ "=============================");
       return service.register(dto);
   }
   @SuppressWarnings("unchecked")
   @GetMapping("{num}")
-  public ResponseEntity<?> get(@PathVariable Long num) {
+  public ResponseEntity<?> get(@PathVariable("num") Long num) {
+      log.error(num);
       return service.get(num).map(ResponseEntity::ok)
       .orElseGet(() -> {
         Map<String,Object> ret = new HashMap<>();
@@ -58,12 +59,12 @@ public class NoteController {
       });
   }
   @PutMapping("{num}")
-  public void putMethodName(@PathVariable Long num, @RequestBody NoteDto dto) {
+  public void putMethodName(@PathVariable("num") Long num, @RequestBody NoteDto dto) {
       log.info(dto);
       service.modify(dto);
   }
   @DeleteMapping("{num}")
-  public void remove(@PathVariable Long num){
+  public void remove(@PathVariable("num") Long num){
     service.remove(num);
   }
   @GetMapping("listall")

@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import shop.yongatae.club.security.dto.LikesDto;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,4 +19,9 @@ import lombok.Setter;
 public class LikesId implements Serializable{
   private Long member;
   private Long note;
+
+  public LikesId(LikesDto dto){
+    member = dto.getMno();
+    note = dto.getNum();
+  }
 }

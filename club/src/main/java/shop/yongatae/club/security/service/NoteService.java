@@ -73,6 +73,7 @@ public interface NoteService {
   }
   Long register(NoteDto dto);
   Optional<NoteDto> get(Long num);
+  
   int modify(NoteDto noteDto);
   int remove(Long num);
   List<NoteDto> list(String email);

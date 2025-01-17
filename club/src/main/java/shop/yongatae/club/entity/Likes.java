@@ -9,6 +9,8 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import shop.yongatae.club.entity.composite.LikesId;
 
@@ -18,6 +20,7 @@ import shop.yongatae.club.entity.composite.LikesId;
 @NoArgsConstructor
 @AllArgsConstructor
 @IdClass(LikesId.class)
+@Getter
 public class Likes extends BaseEntity{
   @Id
   @ManyToOne(fetch = FetchType.LAZY)

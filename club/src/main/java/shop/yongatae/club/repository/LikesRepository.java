@@ -7,5 +7,7 @@ import shop.yongatae.club.entity.Member;
 import shop.yongatae.club.entity.composite.LikesId;
 
 public interface LikesRepository extends JpaRepository<Likes,LikesId>{
+
+  // boolean findById();
   
 }
